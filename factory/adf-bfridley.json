@@ -1,0 +1,9 @@
+{
+	"name": "adf-bfridley",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "08e310b6-53c3-4e90-b7bd-6bbe0dd86c72",
+		"tenantId": "c0b1581c-4511-450c-9b4c-ba498fd5a333"
+	}
+}

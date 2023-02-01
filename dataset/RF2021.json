@@ -1,0 +1,514 @@
+{
+	"name": "RF2021",
+	"properties": {
+		"description": "RF2021 Race Data CSV",
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "RF2021.csv",
+				"container": "data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Race_Date",
+				"type": "String"
+			},
+			{
+				"name": "Track",
+				"type": "String"
+			},
+			{
+				"name": "Race_Num",
+				"type": "String"
+			},
+			{
+				"name": "C",
+				"type": "String"
+			},
+			{
+				"name": "Country",
+				"type": "String"
+			},
+			{
+				"name": "Horse",
+				"type": "String"
+			},
+			{
+				"name": "YOB",
+				"type": "String"
+			},
+			{
+				"name": "Foaling_Date",
+				"type": "String"
+			},
+			{
+				"name": "Foaling_Area",
+				"type": "String"
+			},
+			{
+				"name": "COR_Long",
+				"type": "String"
+			},
+			{
+				"name": "Official_Indicator",
+				"type": "String"
+			},
+			{
+				"name": "RT_7",
+				"type": "String"
+			},
+			{
+				"name": "Age_Restriction",
+				"type": "String"
+			},
+			{
+				"name": "Sex_Restriction",
+				"type": "String"
+			},
+			{
+				"name": "C_ID",
+				"type": "String"
+			},
+			{
+				"name": "R_a",
+				"type": "String"
+			},
+			{
+				"name": "R_d",
+				"type": "String"
+			},
+			{
+				"name": "R_s",
+				"type": "String"
+			},
+			{
+				"name": "Statebred",
+				"type": "String"
+			},
+			{
+				"name": "Off_Turf_Indicator",
+				"type": "String"
+			},
+			{
+				"name": "Purse_USA",
+				"type": "String"
+			},
+			{
+				"name": "TC",
+				"type": "String"
+			},
+			{
+				"name": "Division",
+				"type": "String"
+			},
+			{
+				"name": "Grade",
+				"type": "String"
+			},
+			{
+				"name": "Starters",
+				"type": "String"
+			},
+			{
+				"name": "Max_Claim_Price",
+				"type": "String"
+			},
+			{
+				"name": "Race_Name",
+				"type": "String"
+			},
+			{
+				"name": "Temporary_Rail_Distance",
+				"type": "String"
+			},
+			{
+				"name": "Chute_Start",
+				"type": "String"
+			},
+			{
+				"name": "Track_Sealed_Indicator",
+				"type": "String"
+			},
+			{
+				"name": "Run_Up_Distance",
+				"type": "String"
+			},
+			{
+				"name": "F1",
+				"type": "String"
+			},
+			{
+				"name": "F2",
+				"type": "String"
+			},
+			{
+				"name": "F3",
+				"type": "String"
+			},
+			{
+				"name": "F4",
+				"type": "String"
+			},
+			{
+				"name": "F5",
+				"type": "String"
+			},
+			{
+				"name": "RST",
+				"type": "String"
+			},
+			{
+				"name": "RWT",
+				"type": "String"
+			},
+			{
+				"name": "Pace_Rating_1",
+				"type": "String"
+			},
+			{
+				"name": "Pace_Rating_2",
+				"type": "String"
+			},
+			{
+				"name": "Pace_Rating_3",
+				"type": "String"
+			},
+			{
+				"name": "Pace_Rating_4",
+				"type": "String"
+			},
+			{
+				"name": "Pace_Rating_5",
+				"type": "String"
+			},
+			{
+				"name": "Pace_Rating_Stretch",
+				"type": "String"
+			},
+			{
+				"name": "Race_Csr",
+				"type": "String"
+			},
+			{
+				"name": "Daily_variant",
+				"type": "String"
+			},
+			{
+				"name": "Age",
+				"type": "String"
+			},
+			{
+				"name": "Sex",
+				"type": "String"
+			},
+			{
+				"name": "Earnings_USA",
+				"type": "String"
+			},
+			{
+				"name": "Odds",
+				"type": "String"
+			},
+			{
+				"name": "Favorite_Indicator",
+				"type": "String"
+			},
+			{
+				"name": "Medication",
+				"type": "String"
+			},
+			{
+				"name": "Equipment",
+				"type": "String"
+			},
+			{
+				"name": "Weight_Carried",
+				"type": "String"
+			},
+			{
+				"name": "Pgm_.",
+				"type": "String"
+			},
+			{
+				"name": "PP",
+				"type": "String"
+			},
+			{
+				"name": "C1P",
+				"type": "String"
+			},
+			{
+				"name": "C2P",
+				"type": "String"
+			},
+			{
+				"name": "C3P",
+				"type": "String"
+			},
+			{
+				"name": "C4P",
+				"type": "String"
+			},
+			{
+				"name": "SP",
+				"type": "String"
+			},
+			{
+				"name": "FP",
+				"type": "String"
+			},
+			{
+				"name": "FP_Ofl",
+				"type": "String"
+			},
+			{
+				"name": "DH_Indicator",
+				"type": "String"
+			},
+			{
+				"name": "C1BL",
+				"type": "String"
+			},
+			{
+				"name": "C2BL",
+				"type": "String"
+			},
+			{
+				"name": "C3BL",
+				"type": "String"
+			},
+			{
+				"name": "C4BL",
+				"type": "String"
+			},
+			{
+				"name": "SBL",
+				"type": "String"
+			},
+			{
+				"name": "FBL",
+				"type": "String"
+			},
+			{
+				"name": "Claimed_Price_USA",
+				"type": "String"
+			},
+			{
+				"name": "Claim_Indicator",
+				"type": "String"
+			},
+			{
+				"name": "Coupled_Type",
+				"type": "String"
+			},
+			{
+				"name": "Jockey_F_Name",
+				"type": "String"
+			},
+			{
+				"name": "Jockey_M_Name",
+				"type": "String"
+			},
+			{
+				"name": "Jockey_L_Name",
+				"type": "String"
+			},
+			{
+				"name": "Trainer_F_Name",
+				"type": "String"
+			},
+			{
+				"name": "Trainer_M_Name",
+				"type": "String"
+			},
+			{
+				"name": "Trainer_L_Name",
+				"type": "String"
+			},
+			{
+				"name": "Owner_Full_Name",
+				"type": "String"
+			},
+			{
+				"name": "Trouble_Indicator",
+				"type": "String"
+			},
+			{
+				"name": "Nonbetting_Indicator",
+				"type": "String"
+			},
+			{
+				"name": "Scratch_Indicator",
+				"type": "String"
+			},
+			{
+				"name": "Scratch_Reason",
+				"type": "String"
+			},
+			{
+				"name": "Short_Comment",
+				"type": "String"
+			},
+			{
+				"name": "F1T",
+				"type": "String"
+			},
+			{
+				"name": "F2T",
+				"type": "String"
+			},
+			{
+				"name": "F3T",
+				"type": "String"
+			},
+			{
+				"name": "F4T",
+				"type": "String"
+			},
+			{
+				"name": "F5T",
+				"type": "String"
+			},
+			{
+				"name": "HST",
+				"type": "String"
+			},
+			{
+				"name": "SFR",
+				"type": "String"
+			},
+			{
+				"name": "LFR",
+				"type": "String"
+			},
+			{
+				"name": "HFT",
+				"type": "String"
+			},
+			{
+				"name": "R_.",
+				"type": "String"
+			},
+			{
+				"name": "RS_Actual",
+				"type": "String"
+			},
+			{
+				"name": "RS",
+				"type": "String"
+			},
+			{
+				"name": "Rs_Type",
+				"type": "String"
+			},
+			{
+				"name": "Pos",
+				"type": "String"
+			},
+			{
+				"name": "DSLR",
+				"type": "String"
+			},
+			{
+				"name": "Pr1",
+				"type": "String"
+			},
+			{
+				"name": "Pr2",
+				"type": "String"
+			},
+			{
+				"name": "Pr3",
+				"type": "String"
+			},
+			{
+				"name": "Pr4",
+				"type": "String"
+			},
+			{
+				"name": "Pr5",
+				"type": "String"
+			},
+			{
+				"name": "PrS",
+				"type": "String"
+			},
+			{
+				"name": "PrL",
+				"type": "String"
+			},
+			{
+				"name": "H_Csr",
+				"type": "String"
+			},
+			{
+				"name": "Dam",
+				"type": "String"
+			},
+			{
+				"name": "DamDam",
+				"type": "String"
+			},
+			{
+				"name": "DamSire",
+				"type": "String"
+			},
+			{
+				"name": "Sire",
+				"type": "String"
+			},
+			{
+				"name": "SireDam",
+				"type": "String"
+			},
+			{
+				"name": "SireSire",
+				"type": "String"
+			},
+			{
+				"name": "Dam_YOB",
+				"type": "String"
+			},
+			{
+				"name": "DamDam_YOB",
+				"type": "String"
+			},
+			{
+				"name": "DamSire_YOB",
+				"type": "String"
+			},
+			{
+				"name": "Sire_YOB",
+				"type": "String"
+			},
+			{
+				"name": "SireDam_YOB",
+				"type": "String"
+			},
+			{
+				"name": "SireSire_YOB",
+				"type": "String"
+			},
+			{
+				"name": "Post_Time_ET",
+				"type": "String"
+			},
+			{
+				"name": "race_quality_type",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

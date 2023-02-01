@@ -1,0 +1,1209 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "adf-bfridley"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/WaitPipelne')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Wait1",
+						"type": "Wait",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"waitTimeInSeconds": 10
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage1_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase1_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationDataset_e24')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10,
+						"scale": 0
+					},
+					{
+						"name": "FirstName",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "LastName",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "emp"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/RF2021')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "RF2021 Race Data CSV",
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "RF2021.csv",
+						"container": "data"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Race_Date",
+						"type": "String"
+					},
+					{
+						"name": "Track",
+						"type": "String"
+					},
+					{
+						"name": "Race_Num",
+						"type": "String"
+					},
+					{
+						"name": "C",
+						"type": "String"
+					},
+					{
+						"name": "Country",
+						"type": "String"
+					},
+					{
+						"name": "Horse",
+						"type": "String"
+					},
+					{
+						"name": "YOB",
+						"type": "String"
+					},
+					{
+						"name": "Foaling_Date",
+						"type": "String"
+					},
+					{
+						"name": "Foaling_Area",
+						"type": "String"
+					},
+					{
+						"name": "COR_Long",
+						"type": "String"
+					},
+					{
+						"name": "Official_Indicator",
+						"type": "String"
+					},
+					{
+						"name": "RT_7",
+						"type": "String"
+					},
+					{
+						"name": "Age_Restriction",
+						"type": "String"
+					},
+					{
+						"name": "Sex_Restriction",
+						"type": "String"
+					},
+					{
+						"name": "C_ID",
+						"type": "String"
+					},
+					{
+						"name": "R_a",
+						"type": "String"
+					},
+					{
+						"name": "R_d",
+						"type": "String"
+					},
+					{
+						"name": "R_s",
+						"type": "String"
+					},
+					{
+						"name": "Statebred",
+						"type": "String"
+					},
+					{
+						"name": "Off_Turf_Indicator",
+						"type": "String"
+					},
+					{
+						"name": "Purse_USA",
+						"type": "String"
+					},
+					{
+						"name": "TC",
+						"type": "String"
+					},
+					{
+						"name": "Division",
+						"type": "String"
+					},
+					{
+						"name": "Grade",
+						"type": "String"
+					},
+					{
+						"name": "Starters",
+						"type": "String"
+					},
+					{
+						"name": "Max_Claim_Price",
+						"type": "String"
+					},
+					{
+						"name": "Race_Name",
+						"type": "String"
+					},
+					{
+						"name": "Temporary_Rail_Distance",
+						"type": "String"
+					},
+					{
+						"name": "Chute_Start",
+						"type": "String"
+					},
+					{
+						"name": "Track_Sealed_Indicator",
+						"type": "String"
+					},
+					{
+						"name": "Run_Up_Distance",
+						"type": "String"
+					},
+					{
+						"name": "F1",
+						"type": "String"
+					},
+					{
+						"name": "F2",
+						"type": "String"
+					},
+					{
+						"name": "F3",
+						"type": "String"
+					},
+					{
+						"name": "F4",
+						"type": "String"
+					},
+					{
+						"name": "F5",
+						"type": "String"
+					},
+					{
+						"name": "RST",
+						"type": "String"
+					},
+					{
+						"name": "RWT",
+						"type": "String"
+					},
+					{
+						"name": "Pace_Rating_1",
+						"type": "String"
+					},
+					{
+						"name": "Pace_Rating_2",
+						"type": "String"
+					},
+					{
+						"name": "Pace_Rating_3",
+						"type": "String"
+					},
+					{
+						"name": "Pace_Rating_4",
+						"type": "String"
+					},
+					{
+						"name": "Pace_Rating_5",
+						"type": "String"
+					},
+					{
+						"name": "Pace_Rating_Stretch",
+						"type": "String"
+					},
+					{
+						"name": "Race_Csr",
+						"type": "String"
+					},
+					{
+						"name": "Daily_variant",
+						"type": "String"
+					},
+					{
+						"name": "Age",
+						"type": "String"
+					},
+					{
+						"name": "Sex",
+						"type": "String"
+					},
+					{
+						"name": "Earnings_USA",
+						"type": "String"
+					},
+					{
+						"name": "Odds",
+						"type": "String"
+					},
+					{
+						"name": "Favorite_Indicator",
+						"type": "String"
+					},
+					{
+						"name": "Medication",
+						"type": "String"
+					},
+					{
+						"name": "Equipment",
+						"type": "String"
+					},
+					{
+						"name": "Weight_Carried",
+						"type": "String"
+					},
+					{
+						"name": "Pgm_.",
+						"type": "String"
+					},
+					{
+						"name": "PP",
+						"type": "String"
+					},
+					{
+						"name": "C1P",
+						"type": "String"
+					},
+					{
+						"name": "C2P",
+						"type": "String"
+					},
+					{
+						"name": "C3P",
+						"type": "String"
+					},
+					{
+						"name": "C4P",
+						"type": "String"
+					},
+					{
+						"name": "SP",
+						"type": "String"
+					},
+					{
+						"name": "FP",
+						"type": "String"
+					},
+					{
+						"name": "FP_Ofl",
+						"type": "String"
+					},
+					{
+						"name": "DH_Indicator",
+						"type": "String"
+					},
+					{
+						"name": "C1BL",
+						"type": "String"
+					},
+					{
+						"name": "C2BL",
+						"type": "String"
+					},
+					{
+						"name": "C3BL",
+						"type": "String"
+					},
+					{
+						"name": "C4BL",
+						"type": "String"
+					},
+					{
+						"name": "SBL",
+						"type": "String"
+					},
+					{
+						"name": "FBL",
+						"type": "String"
+					},
+					{
+						"name": "Claimed_Price_USA",
+						"type": "String"
+					},
+					{
+						"name": "Claim_Indicator",
+						"type": "String"
+					},
+					{
+						"name": "Coupled_Type",
+						"type": "String"
+					},
+					{
+						"name": "Jockey_F_Name",
+						"type": "String"
+					},
+					{
+						"name": "Jockey_M_Name",
+						"type": "String"
+					},
+					{
+						"name": "Jockey_L_Name",
+						"type": "String"
+					},
+					{
+						"name": "Trainer_F_Name",
+						"type": "String"
+					},
+					{
+						"name": "Trainer_M_Name",
+						"type": "String"
+					},
+					{
+						"name": "Trainer_L_Name",
+						"type": "String"
+					},
+					{
+						"name": "Owner_Full_Name",
+						"type": "String"
+					},
+					{
+						"name": "Trouble_Indicator",
+						"type": "String"
+					},
+					{
+						"name": "Nonbetting_Indicator",
+						"type": "String"
+					},
+					{
+						"name": "Scratch_Indicator",
+						"type": "String"
+					},
+					{
+						"name": "Scratch_Reason",
+						"type": "String"
+					},
+					{
+						"name": "Short_Comment",
+						"type": "String"
+					},
+					{
+						"name": "F1T",
+						"type": "String"
+					},
+					{
+						"name": "F2T",
+						"type": "String"
+					},
+					{
+						"name": "F3T",
+						"type": "String"
+					},
+					{
+						"name": "F4T",
+						"type": "String"
+					},
+					{
+						"name": "F5T",
+						"type": "String"
+					},
+					{
+						"name": "HST",
+						"type": "String"
+					},
+					{
+						"name": "SFR",
+						"type": "String"
+					},
+					{
+						"name": "LFR",
+						"type": "String"
+					},
+					{
+						"name": "HFT",
+						"type": "String"
+					},
+					{
+						"name": "R_.",
+						"type": "String"
+					},
+					{
+						"name": "RS_Actual",
+						"type": "String"
+					},
+					{
+						"name": "RS",
+						"type": "String"
+					},
+					{
+						"name": "Rs_Type",
+						"type": "String"
+					},
+					{
+						"name": "Pos",
+						"type": "String"
+					},
+					{
+						"name": "DSLR",
+						"type": "String"
+					},
+					{
+						"name": "Pr1",
+						"type": "String"
+					},
+					{
+						"name": "Pr2",
+						"type": "String"
+					},
+					{
+						"name": "Pr3",
+						"type": "String"
+					},
+					{
+						"name": "Pr4",
+						"type": "String"
+					},
+					{
+						"name": "Pr5",
+						"type": "String"
+					},
+					{
+						"name": "PrS",
+						"type": "String"
+					},
+					{
+						"name": "PrL",
+						"type": "String"
+					},
+					{
+						"name": "H_Csr",
+						"type": "String"
+					},
+					{
+						"name": "Dam",
+						"type": "String"
+					},
+					{
+						"name": "DamDam",
+						"type": "String"
+					},
+					{
+						"name": "DamSire",
+						"type": "String"
+					},
+					{
+						"name": "Sire",
+						"type": "String"
+					},
+					{
+						"name": "SireDam",
+						"type": "String"
+					},
+					{
+						"name": "SireSire",
+						"type": "String"
+					},
+					{
+						"name": "Dam_YOB",
+						"type": "String"
+					},
+					{
+						"name": "DamDam_YOB",
+						"type": "String"
+					},
+					{
+						"name": "DamSire_YOB",
+						"type": "String"
+					},
+					{
+						"name": "Sire_YOB",
+						"type": "String"
+					},
+					{
+						"name": "SireDam_YOB",
+						"type": "String"
+					},
+					{
+						"name": "SireSire_YOB",
+						"type": "String"
+					},
+					{
+						"name": "Post_Time_ET",
+						"type": "String"
+					},
+					{
+						"name": "race_quality_type",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLRF2021')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "race"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_e24')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "inputEmp.txt",
+						"container": "data"
+					},
+					"columnDelimiter": "|",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "FirstName",
+						"type": "String"
+					},
+					{
+						"name": "LastName",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CopyFromBlobToSqlPipeline')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy_e24",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Script1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "data//inputEmp.txt"
+							},
+							{
+								"name": "Destination",
+								"value": "dbo.emp"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings",
+									"skipLineCount": 0
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false,
+							"validateDataConsistency": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "FirstName",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "FirstName",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "LastName",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "LastName",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SourceDataset_e24",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationDataset_e24",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Script1",
+						"description": "delete from dbo.emp",
+						"type": "Script",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"linkedServiceName": {
+							"referenceName": "AzureSqlDatabase1",
+							"type": "LinkedServiceReference"
+						},
+						"typeProperties": {
+							"scripts": [
+								{
+									"type": "Query",
+									"text": "delete from dbo.emp"
+								}
+							],
+							"scriptBlockExecutionTimeout": "02:00:00"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2023-01-31T20:05:31Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/SourceDataset_e24')]",
+				"[concat(variables('factoryId'), '/datasets/DestinationDataset_e24')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CopyRaceCSVToSQL')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "RF2021 CSV to SQL Database from Blob Storage",
+				"activities": [
+					{
+						"name": "CopyRF2021",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Delete Table",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false,
+								"tableOption": "autoCreate",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Race_Date",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Race_Date",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Track",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Track",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Race_Num",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Race_Num",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Country",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Country",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Horse",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Horse",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "YOB",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "YOB",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Odds",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Odds",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Favorite_Indicator",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Favorite_Indicator",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Medication",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Medication",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Equipment",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Equipment",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Weight_Carried",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Weight_Carried",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "FP",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "FP",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "FP_Ofl",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "FP_Ofl",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Jockey_F_Name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Jockey_F_Name",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Jockey_M_Name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Jockey_M_Name",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Jockey_L_Name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Jockey_L_Name",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Trainer_F_Name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Trainer_F_Name",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Trainer_M_Name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Trainer_M_Name",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Trainer_L_Name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Trainer_L_Name",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Owner_Full_Name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Owner_Full_Name",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Scratch_Indicator",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Scratch_Indicator",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Scratch_Reason",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Scratch_Reason",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "RF2021",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "SQLRF2021",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Delete Table",
+						"type": "Script",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"linkedServiceName": {
+							"referenceName": "AzureSqlDatabase1",
+							"type": "LinkedServiceReference"
+						},
+						"typeProperties": {
+							"scripts": [
+								{
+									"type": "Query",
+									"text": "drop table dbo.race"
+								}
+							],
+							"scriptBlockExecutionTimeout": "02:00:00"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2023-01-31T21:10:27Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/RF2021')]",
+				"[concat(variables('factoryId'), '/datasets/SQLRF2021')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		}
+	]
+}

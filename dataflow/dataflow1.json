@@ -22,7 +22,7 @@
 			"scriptLines": [
 				"source(output(",
 				"          {Race Date} as string,",
-				"          {Track Name} as string,",
+				"          {Race Track Name} as string,",
 				"          {Race Number} as string,",
 				"          C as string,",
 				"          Country as string,",

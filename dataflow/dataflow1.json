@@ -10,11 +10,15 @@
 						"type": "DatasetReference"
 					},
 					"name": "SourceCSV",
-					"description": "CSV Source File"
+					"description": "CSV Source file with Space in Column Name"
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "select1"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          {Race Date} as string,",
@@ -32,11 +36,17 @@
 				"          {Age Restriction} as string,",
 				"          {Sex Restriction} as string,",
 				"          {C ID} as string,",
-				"          {R d} as string",
+				"          {R d} as decimal(10,0)",
 				"     ),",
 				"     allowSchemaDrift: false,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> SourceCSV"
+				"     ignoreNoFilesFound: false) ~> SourceCSV",
+				"SourceCSV select(mapColumn(",
+				"          each(match(true()),",
+				"               regexReplace($$,'[^a-zA-Z]','_') = $$)",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1"
 			]
 		}
 	}

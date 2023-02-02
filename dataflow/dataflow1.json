@@ -1,6 +1,7 @@
 {
 	"name": "dataflow1",
 	"properties": {
+		"description": "Replace any space\n    regexReplace($$,' ','_')\n\nReplace any non-letter \n    regexReplace($$,'[^a-zA-Z]','_')",
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [
@@ -36,7 +37,7 @@
 				"          {Age Restriction} as string,",
 				"          {Sex Restriction} as string,",
 				"          {C ID} as string,",
-				"          {R d} as decimal(10,0)",
+				"          {R d} as string",
 				"     ),",
 				"     allowSchemaDrift: false,",
 				"     validateSchema: false,",

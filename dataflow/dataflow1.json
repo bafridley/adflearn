@@ -1,0 +1,43 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "CSVDelimited",
+						"type": "DatasetReference"
+					},
+					"name": "SourceCSV",
+					"description": "CSV Source File"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          {Race Date} as string,",
+				"          {Track Name} as string,",
+				"          {Race Number} as string,",
+				"          C as string,",
+				"          Country as string,",
+				"          {Horse Name} as string,",
+				"          YOB as string,",
+				"          {Foaling Date} as string,",
+				"          {Foaling Area} as string,",
+				"          {COR Long} as string,",
+				"          {Official Indicator} as string,",
+				"          {RT 7} as string,",
+				"          {Age Restriction} as string,",
+				"          {Sex Restriction} as string,",
+				"          {C ID} as string,",
+				"          {R d} as string",
+				"     ),",
+				"     allowSchemaDrift: false,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> SourceCSV"
+			]
+		}
+	}
+}

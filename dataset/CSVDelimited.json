@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "RaceSampleCSV.csv",
+				"fileName": "RaceSampleCSV-Spaces.csv",
 				"container": "data"
 			},
 			"columnDelimiter": ",",
@@ -20,15 +20,15 @@
 		},
 		"schema": [
 			{
-				"name": "Race_Date",
+				"name": "Race Date",
 				"type": "String"
 			},
 			{
-				"name": "Track",
+				"name": "Track Name",
 				"type": "String"
 			},
 			{
-				"name": "Race_No",
+				"name": "Race Number",
 				"type": "String"
 			},
 			{
@@ -40,7 +40,7 @@
 				"type": "String"
 			},
 			{
-				"name": "Horse_Name",
+				"name": "Horse Name",
 				"type": "String"
 			},
 			{
@@ -48,39 +48,39 @@
 				"type": "String"
 			},
 			{
-				"name": "Foaling_Date",
+				"name": "Foaling Date",
 				"type": "String"
 			},
 			{
-				"name": "Foaling_Area",
+				"name": "Foaling Area",
 				"type": "String"
 			},
 			{
-				"name": "COR_Long",
+				"name": "COR Long",
 				"type": "String"
 			},
 			{
-				"name": "Official_Indicator",
+				"name": "Official Indicator",
 				"type": "String"
 			},
 			{
-				"name": "RT_7",
+				"name": "RT 7",
 				"type": "String"
 			},
 			{
-				"name": "Age_Restriction",
+				"name": "Age Restriction",
 				"type": "String"
 			},
 			{
-				"name": "Sex_Restriction",
+				"name": "Sex Restriction",
 				"type": "String"
 			},
 			{
-				"name": "C_ID",
+				"name": "C ID",
 				"type": "String"
 			},
 			{
-				"name": "R_d",
+				"name": "R d",
 				"type": "String"
 			}
 		]

@@ -17,7 +17,7 @@
 			"sinks": [],
 			"transformations": [
 				{
-					"name": "select1"
+					"name": "RemoveColumnNameSpaces"
 				}
 			],
 			"scriptLines": [
@@ -47,7 +47,7 @@
 				"               regexReplace($$,' ','_') = $$)",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1"
+				"     skipDuplicateMapOutputs: true) ~> RemoveColumnNameSpaces"
 			]
 		}
 	}

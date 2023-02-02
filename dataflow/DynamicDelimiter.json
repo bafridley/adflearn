@@ -1,0 +1,39 @@
+{
+	"name": "DynamicDelimiter",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedInputSurce",
+						"type": "DatasetReference"
+					},
+					"name": "SourceData"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "StringColumn"
+				},
+				{
+					"name": "filter1"
+				},
+				{
+					"name": "surrogateKey1"
+				}
+			],
+			"scriptLines": [
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> SourceData",
+				"filter1 derive() ~> StringColumn",
+				"surrogateKey1 filter(ERROR_FUNCTION('')) ~> filter1",
+				"SourceData keyGenerate(output(RowNum as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> surrogateKey1"
+			]
+		}
+	}
+}

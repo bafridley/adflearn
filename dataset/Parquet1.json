@@ -1,0 +1,85 @@
+{
+	"name": "Parquet1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Output",
+				"container": "data"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "Race_Date",
+				"type": "UTF8"
+			},
+			{
+				"name": "Track",
+				"type": "UTF8"
+			},
+			{
+				"name": "Race_No",
+				"type": "UTF8"
+			},
+			{
+				"name": "C",
+				"type": "UTF8"
+			},
+			{
+				"name": "Country",
+				"type": "UTF8"
+			},
+			{
+				"name": "Horse_Name",
+				"type": "UTF8"
+			},
+			{
+				"name": "YOB",
+				"type": "UTF8"
+			},
+			{
+				"name": "Foaling_Date",
+				"type": "UTF8"
+			},
+			{
+				"name": "Foaling_Area",
+				"type": "UTF8"
+			},
+			{
+				"name": "COR_Long",
+				"type": "UTF8"
+			},
+			{
+				"name": "Official_Indicator",
+				"type": "UTF8"
+			},
+			{
+				"name": "RT_7",
+				"type": "UTF8"
+			},
+			{
+				"name": "Age_Restriction",
+				"type": "UTF8"
+			},
+			{
+				"name": "Sex_Restriction",
+				"type": "UTF8"
+			},
+			{
+				"name": "C_ID",
+				"type": "UTF8"
+			},
+			{
+				"name": "R_d",
+				"type": "UTF8"
+			}
+		]
+	}
+}

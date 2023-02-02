@@ -71,6 +71,99 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/CSVDelimited')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "RaceSampleCSV.csv",
+						"container": "data"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Race_Date",
+						"type": "String"
+					},
+					{
+						"name": "Track",
+						"type": "String"
+					},
+					{
+						"name": "Race_No",
+						"type": "String"
+					},
+					{
+						"name": "C",
+						"type": "String"
+					},
+					{
+						"name": "Country",
+						"type": "String"
+					},
+					{
+						"name": "Horse_Name",
+						"type": "String"
+					},
+					{
+						"name": "YOB",
+						"type": "String"
+					},
+					{
+						"name": "Foaling_Date",
+						"type": "String"
+					},
+					{
+						"name": "Foaling_Area",
+						"type": "String"
+					},
+					{
+						"name": "COR_Long",
+						"type": "String"
+					},
+					{
+						"name": "Official_Indicator",
+						"type": "String"
+					},
+					{
+						"name": "RT_7",
+						"type": "String"
+					},
+					{
+						"name": "Age_Restriction",
+						"type": "String"
+					},
+					{
+						"name": "Sex_Restriction",
+						"type": "String"
+					},
+					{
+						"name": "C_ID",
+						"type": "String"
+					},
+					{
+						"name": "R_d",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DestinationDataset_e24')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -108,6 +201,38 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PipeDelimited')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "RaceSamplePipe.txt",
+						"container": "data"
+					},
+					"columnDelimiter": "|",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
 			]
 		},
 		{

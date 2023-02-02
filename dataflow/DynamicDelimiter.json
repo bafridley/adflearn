@@ -15,24 +15,24 @@
 			"sinks": [],
 			"transformations": [
 				{
-					"name": "StringColumn"
+					"name": "Delimiter"
 				},
 				{
-					"name": "filter1"
+					"name": "HeaderRow"
 				},
 				{
-					"name": "surrogateKey1"
+					"name": "SourceWithRowNum"
 				}
 			],
 			"scriptLines": [
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> SourceData",
-				"filter1 derive() ~> StringColumn",
-				"surrogateKey1 filter(ERROR_FUNCTION('')) ~> filter1",
+				"HeaderRow derive(column1 = ERROR_FUNCTION('')) ~> Delimiter",
+				"SourceWithRowNum filter(RowNum==1) ~> HeaderRow",
 				"SourceData keyGenerate(output(RowNum as long),",
 				"     startAt: 1L,",
-				"     stepValue: 1L) ~> surrogateKey1"
+				"     stepValue: 1L) ~> SourceWithRowNum"
 			]
 		}
 	}

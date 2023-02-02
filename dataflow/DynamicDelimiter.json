@@ -35,7 +35,7 @@
 				"SourceData keyGenerate(output(RowNum as long),",
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> SourceWithRowNum",
-				"HeaderRow derive(Delimiter = 'Delimiter:,'+toString(regexExtract(RowData,'([!$`~%^,|\\t])',1))) ~> RowWithDelimiter"
+				"HeaderRow derive(Delimiter = 'Delimiter:,'+toString(regexExtract(RowData,'([,|])',1))) ~> RowWithDelimiter"
 			]
 		}
 	}

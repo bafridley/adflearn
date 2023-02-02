@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "RaceSamplePipe.txt",
+				"fileName": "RaceSampleCSV-Spaces.csv",
 				"container": "data"
 			},
 			"columnDelimiter": "",

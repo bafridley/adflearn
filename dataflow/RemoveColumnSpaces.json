@@ -1,5 +1,5 @@
 {
-	"name": "dataflow1",
+	"name": "RemoveColumnSpaces",
 	"properties": {
 		"description": "Replace any space\n    regexReplace($$,' ','_')\n\nReplace any non-letter \n    regexReplace($$,'[^a-zA-Z]','_')",
 		"type": "MappingDataFlow",

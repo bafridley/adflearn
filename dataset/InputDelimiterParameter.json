@@ -14,7 +14,9 @@
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobStorageLocation"
+				"type": "AzureBlobStorageLocation",
+				"fileName": "RaceSamplePipe.txt",
+				"container": "data"
 			},
 			"columnDelimiter": {
 				"value": "@dataset().Delimiter",

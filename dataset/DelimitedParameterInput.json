@@ -18,7 +18,10 @@
 				"fileName": "RaceSamplePipe.txt",
 				"container": "data"
 			},
-			"columnDelimiter": ",",
+			"columnDelimiter": {
+				"value": "@dataset().Delimiter",
+				"type": "Expression"
+			},
 			"escapeChar": "\\",
 			"quoteChar": "\""
 		},

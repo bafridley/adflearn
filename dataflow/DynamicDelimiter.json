@@ -12,7 +12,11 @@
 					"name": "SourceData"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "HeaderRow"
@@ -25,17 +29,21 @@
 				}
 			],
 			"scriptLines": [
-				"source(output(",
-				"          RowData as string",
-				"     ),",
-				"     allowSchemaDrift: true,",
+				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> SourceData",
 				"SourceWithRowNum filter(RowNum==1) ~> HeaderRow",
 				"SourceData keyGenerate(output(RowNum as long),",
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> SourceWithRowNum",
-				"HeaderRow derive(Delimiter = 'Delimiter:,'+toString(regexExtract(RowData,'([,|])',1))) ~> RowWithDelimiter"
+				"HeaderRow derive(Delimiter = 'Delimiter:'+toString(regexExtract(RowData,'([,|])',1))) ~> RowWithDelimiter",
+				"RowWithDelimiter sink(validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     store: 'cache',",
+				"     format: 'inline',",
+				"     output: false,",
+				"     saveOrder: 1) ~> sink1"
 			]
 		}
 	}

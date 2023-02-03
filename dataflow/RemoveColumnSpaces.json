@@ -14,7 +14,11 @@
 					"description": "CSV Source file with Space in Column Name"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "RemoveColumnNameSpaces"
@@ -47,7 +51,14 @@
 				"               regexReplace($$,' ','_') = $$)",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> RemoveColumnNameSpaces"
+				"     skipDuplicateMapOutputs: true) ~> RemoveColumnNameSpaces",
+				"RemoveColumnNameSpaces sink(validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     store: 'cache',",
+				"     format: 'inline',",
+				"     output: false,",
+				"     saveOrder: 1) ~> sink1"
 			]
 		}
 	}

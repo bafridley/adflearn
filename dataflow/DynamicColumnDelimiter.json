@@ -25,6 +25,10 @@
 				}
 			],
 			"scriptLines": [
+				"parameters{",
+				"     parameter1 as string (Delimiter=='|\r",
+				"')",
+				"}",
 				"source(output(",
 				"          RowString as string",
 				"     ),",

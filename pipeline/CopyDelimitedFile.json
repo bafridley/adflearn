@@ -1,0 +1,11 @@
+{
+	"name": "CopyDelimitedFile",
+	"properties": {
+		"variables": {
+			"PipelineVariable": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}

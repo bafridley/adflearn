@@ -1,0 +1,42 @@
+{
+	"name": "DynamicColumnDelimiter",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "InputTextUnknownDelimiter",
+						"type": "DatasetReference"
+					},
+					"name": "SourceUnknownType"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "SourceWithRowNum"
+				},
+				{
+					"name": "HeaderRow"
+				},
+				{
+					"name": "RowWithDelimiter"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          RowString as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> SourceUnknownType",
+				"SourceUnknownType keyGenerate(output(RowNum as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> SourceWithRowNum",
+				"SourceWithRowNum filter(RowNum == 1) ~> HeaderRow",
+				"HeaderRow derive(Delimiter = toString(regexExtract(RowString,'([!$`~%^,|\\t])',1))) ~> RowWithDelimiter"
+			]
+		}
+	}
+}

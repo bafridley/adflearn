@@ -1,6 +1,12 @@
 {
 	"name": "adf-bfridley",
 	"properties": {
+		"globalParameters": {
+			"P1": {
+				"type": "string",
+				"value": "PPP"
+			}
+		},
 		"globalConfigurations": {
 			"PipelineBillingEnabled": "true"
 		}

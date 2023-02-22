@@ -1,0 +1,20 @@
+{
+	"name": "powerquery1",
+	"properties": {
+		"type": "WranglingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"name": "CSVDelimited",
+					"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~>  CSVDelimited",
+					"dataset": {
+						"referenceName": "CSVDelimited",
+						"type": "DatasetReference"
+					}
+				}
+			],
+			"script": "section Section1;\r\nshared CSVDelimited = let AdfDoc = AzureStorage.BlobContents(\"https://storageaccountbfridley.blob.core.windows.net/data/RaceSampleCSV-Spaces.csv\"),Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]), PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true]) in  PromotedHeaders;\r\nshared UserQuery = let Source = #\"CSVDelimited\",\r\n  #\"Sorted rows\" = Table.Sort(Source, {{\"Race Track Name\", Order.Ascending}}),\r\n  #\"Filtered rows\" = Table.SelectRows(#\"Sorted rows\", each [Race Track Name] = \"BEL\") in #\"Filtered rows\";\r\n",
+			"documentLocale": "en-us"
+		}
+	}
+}

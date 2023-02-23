@@ -21,7 +21,16 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [],
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "data//RF2021.csv"
+					},
+					{
+						"name": "Destination",
+						"value": "dbo.race"
+					}
+				],
 				"typeProperties": {
 					"source": {
 						"type": "DelimitedTextSource",

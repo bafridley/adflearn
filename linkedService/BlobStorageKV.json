@@ -1,0 +1,17 @@
+{
+	"name": "BlobStorageKV",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobStorage",
+		"typeProperties": {
+			"connectionString": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "ADFKV",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "storageacct"
+			}
+		}
+	}
+}

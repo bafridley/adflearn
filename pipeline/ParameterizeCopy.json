@@ -49,7 +49,7 @@
 						"referenceName": "CSVParameter",
 						"type": "DatasetReference",
 						"parameters": {
-							"FileName": "stallion.csv"
+							"FileName": "Stallion.csv"
 						}
 					}
 				],

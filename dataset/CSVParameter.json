@@ -1,0 +1,160 @@
+{
+	"name": "CSVParameter",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "InputAzureBlob",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"FileName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().FileName",
+					"type": "Expression"
+				},
+				"container": "data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Prop_0",
+				"type": "String"
+			},
+			{
+				"name": "StallionName",
+				"type": "String"
+			},
+			{
+				"name": "StallionYOB",
+				"type": "String"
+			},
+			{
+				"name": "StallionSire",
+				"type": "String"
+			},
+			{
+				"name": "StallionDam",
+				"type": "String"
+			},
+			{
+				"name": "StallionDamSire",
+				"type": "String"
+			},
+			{
+				"name": "Stallion1stStudYear",
+				"type": "String"
+			},
+			{
+				"name": "Stallion1stFoalYear",
+				"type": "String"
+			},
+			{
+				"name": "StallionRegion",
+				"type": "String"
+			},
+			{
+				"name": "StallionInitialLocation",
+				"type": "String"
+			},
+			{
+				"name": "StallionCurrentLocation",
+				"type": "String"
+			},
+			{
+				"name": "StallionFarm",
+				"type": "String"
+			},
+			{
+				"name": "StallionFAM",
+				"type": "String"
+			},
+			{
+				"name": "StallionFDM",
+				"type": "String"
+			},
+			{
+				"name": "StallionFee2011",
+				"type": "String"
+			},
+			{
+				"name": "StallionFee2012",
+				"type": "String"
+			},
+			{
+				"name": "StallionFee2013",
+				"type": "String"
+			},
+			{
+				"name": "StallionFee2014",
+				"type": "String"
+			},
+			{
+				"name": "StallionFee2015",
+				"type": "String"
+			},
+			{
+				"name": "StallionFee2016",
+				"type": "String"
+			},
+			{
+				"name": "StallionFee2017",
+				"type": "String"
+			},
+			{
+				"name": "StallionFee2018",
+				"type": "String"
+			},
+			{
+				"name": "StallionFee2019",
+				"type": "String"
+			},
+			{
+				"name": "StallionFee2020",
+				"type": "String"
+			},
+			{
+				"name": "StallionFee2021",
+				"type": "String"
+			},
+			{
+				"name": "StallionFee2022",
+				"type": "String"
+			},
+			{
+				"name": "StallionFee2023",
+				"type": "String"
+			},
+			{
+				"name": "StallionFee2024",
+				"type": "String"
+			},
+			{
+				"name": "StallionFee2025",
+				"type": "String"
+			},
+			{
+				"name": "StallionFee2026",
+				"type": "String"
+			},
+			{
+				"name": "StallionFee2027",
+				"type": "String"
+			},
+			{
+				"name": "StallionFee2028",
+				"type": "String"
+			}
+		]
+	}
+}

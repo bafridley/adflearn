@@ -14,6 +14,14 @@
 		"AzureSqlDatabase1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
+		},
+		"InputAzureBlob_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'InputAzureBlob'"
+		},
+		"OutputAzureSQL_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'OutputAzureSQL'"
 		}
 	},
 	"variables": {
@@ -66,6 +74,32 @@
 				"type": "AzureSqlDatabase",
 				"typeProperties": {
 					"connectionString": "[parameters('AzureSqlDatabase1_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/InputAzureBlob')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('InputAzureBlob_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/OutputAzureSQL')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('OutputAzureSQL_connectionString')]"
 				}
 			},
 			"dependsOn": []
@@ -161,6 +195,171 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CSVParameter')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "InputAzureBlob",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"FileName": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": {
+							"value": "@dataset().FileName",
+							"type": "Expression"
+						},
+						"container": "data"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Prop_0",
+						"type": "String"
+					},
+					{
+						"name": "StallionName",
+						"type": "String"
+					},
+					{
+						"name": "StallionYOB",
+						"type": "String"
+					},
+					{
+						"name": "StallionSire",
+						"type": "String"
+					},
+					{
+						"name": "StallionDam",
+						"type": "String"
+					},
+					{
+						"name": "StallionDamSire",
+						"type": "String"
+					},
+					{
+						"name": "Stallion1stStudYear",
+						"type": "String"
+					},
+					{
+						"name": "Stallion1stFoalYear",
+						"type": "String"
+					},
+					{
+						"name": "StallionRegion",
+						"type": "String"
+					},
+					{
+						"name": "StallionInitialLocation",
+						"type": "String"
+					},
+					{
+						"name": "StallionCurrentLocation",
+						"type": "String"
+					},
+					{
+						"name": "StallionFarm",
+						"type": "String"
+					},
+					{
+						"name": "StallionFAM",
+						"type": "String"
+					},
+					{
+						"name": "StallionFDM",
+						"type": "String"
+					},
+					{
+						"name": "StallionFee2011",
+						"type": "String"
+					},
+					{
+						"name": "StallionFee2012",
+						"type": "String"
+					},
+					{
+						"name": "StallionFee2013",
+						"type": "String"
+					},
+					{
+						"name": "StallionFee2014",
+						"type": "String"
+					},
+					{
+						"name": "StallionFee2015",
+						"type": "String"
+					},
+					{
+						"name": "StallionFee2016",
+						"type": "String"
+					},
+					{
+						"name": "StallionFee2017",
+						"type": "String"
+					},
+					{
+						"name": "StallionFee2018",
+						"type": "String"
+					},
+					{
+						"name": "StallionFee2019",
+						"type": "String"
+					},
+					{
+						"name": "StallionFee2020",
+						"type": "String"
+					},
+					{
+						"name": "StallionFee2021",
+						"type": "String"
+					},
+					{
+						"name": "StallionFee2022",
+						"type": "String"
+					},
+					{
+						"name": "StallionFee2023",
+						"type": "String"
+					},
+					{
+						"name": "StallionFee2024",
+						"type": "String"
+					},
+					{
+						"name": "StallionFee2025",
+						"type": "String"
+					},
+					{
+						"name": "StallionFee2026",
+						"type": "String"
+					},
+					{
+						"name": "StallionFee2027",
+						"type": "String"
+					},
+					{
+						"name": "StallionFee2028",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/InputAzureBlob')]"
 			]
 		},
 		{
@@ -1325,6 +1524,35 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/SQLParameter')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "OutputAzureSQL",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"TableName": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "sandbox",
+					"table": {
+						"value": "@dataset().TableName",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/OutputAzureSQL')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/SQLRF2021')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1794,690 +2022,6 @@
 				"[concat(variables('factoryId'), '/datasets/SourceDataset_e24')]",
 				"[concat(variables('factoryId'), '/datasets/DestinationDataset_e24')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/CopyRaceCSVToSQL')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "RF2021 CSV to SQL Database from Blob Storage",
-				"activities": [
-					{
-						"name": "CopyRF2021",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "Delete Table",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true,
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "AzureSqlSink",
-								"writeBehavior": "insert",
-								"sqlWriterUseTableLock": false,
-								"tableOption": "autoCreate",
-								"disableMetricsCollection": false
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "Race_Date",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Race_Date",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Track",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Track",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Race_Num",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Race_Num",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Country",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Country",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Horse",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Horse",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "YOB",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "YOB",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Odds",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Odds",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Favorite_Indicator",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Favorite_Indicator",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Medication",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Medication",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Equipment",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Equipment",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Weight_Carried",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Weight_Carried",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "FP",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "FP",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "FP_Ofl",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "FP_Ofl",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Jockey_F_Name",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Jockey_F_Name",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Jockey_M_Name",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Jockey_M_Name",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Jockey_L_Name",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Jockey_L_Name",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Trainer_F_Name",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Trainer_F_Name",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Trainer_M_Name",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Trainer_M_Name",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Trainer_L_Name",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Trainer_L_Name",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Owner_Full_Name",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Owner_Full_Name",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Scratch_Indicator",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Scratch_Indicator",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Scratch_Reason",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Scratch_Reason",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									}
-								],
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "RF2021",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "SQLRF2021",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Delete Table",
-						"type": "Script",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"linkedServiceName": {
-							"referenceName": "AzureSqlDatabase1",
-							"type": "LinkedServiceReference"
-						},
-						"typeProperties": {
-							"scripts": [
-								{
-									"type": "Query",
-									"text": "drop table dbo.race"
-								}
-							],
-							"scriptBlockExecutionTimeout": "02:00:00"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": [],
-				"lastPublishTime": "2023-01-31T21:10:27Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/RF2021')]",
-				"[concat(variables('factoryId'), '/datasets/SQLRF2021')]",
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DynamicColumnDelimiter')]",
-			"type": "Microsoft.DataFactory/factories/dataflows",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "MappingDataFlow",
-				"typeProperties": {
-					"sources": [
-						{
-							"dataset": {
-								"referenceName": "InputTextUnknownDelimiter",
-								"type": "DatasetReference"
-							},
-							"name": "SourceUnknownType"
-						}
-					],
-					"sinks": [
-						{
-							"dataset": {
-								"referenceName": "FoundDelimiter",
-								"type": "DatasetReference"
-							},
-							"name": "sink1"
-						}
-					],
-					"transformations": [
-						{
-							"name": "SourceWithRowNum"
-						},
-						{
-							"name": "HeaderRow"
-						},
-						{
-							"name": "RowWithDelimiter"
-						}
-					],
-					"scriptLines": [
-						"source(output(",
-						"          RowString as string",
-						"     ),",
-						"     allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     ignoreNoFilesFound: false) ~> SourceUnknownType",
-						"SourceUnknownType keyGenerate(output(RowNum as long),",
-						"     startAt: 1L,",
-						"     stepValue: 1L) ~> SourceWithRowNum",
-						"SourceWithRowNum filter(RowNum == 1) ~> HeaderRow",
-						"HeaderRow derive(Delimiter = toString(regexExtract(RowString,'([!$`~%^,|\\t])',1))) ~> RowWithDelimiter",
-						"RowWithDelimiter sink(allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     input(",
-						"          Column_1 as string,",
-						"          Column_2 as string,",
-						"          Column_3 as string,",
-						"          Column_4 as string,",
-						"          Column_5 as string,",
-						"          Column_6 as string,",
-						"          Column_7 as string,",
-						"          Column_8 as string,",
-						"          Column_9 as string,",
-						"          Column_10 as string,",
-						"          Column_11 as string,",
-						"          Column_12 as string,",
-						"          Column_13 as string,",
-						"          Column_14 as string,",
-						"          Column_15 as string,",
-						"          Column_16 as string,",
-						"          Column_17 as string,",
-						"          Column_18 as string,",
-						"          Column_19 as string,",
-						"          Column_20 as string,",
-						"          Column_21 as string,",
-						"          Column_22 as string,",
-						"          Column_23 as string,",
-						"          Column_24 as string,",
-						"          Column_25 as string,",
-						"          Column_26 as string,",
-						"          Column_27 as string,",
-						"          Column_28 as string,",
-						"          Column_29 as string,",
-						"          Column_30 as string,",
-						"          Column_31 as string,",
-						"          Column_32 as string,",
-						"          Column_33 as string,",
-						"          Column_34 as string,",
-						"          Column_35 as string,",
-						"          Column_36 as string,",
-						"          Column_37 as string,",
-						"          Column_38 as string,",
-						"          Column_39 as string,",
-						"          Column_40 as string,",
-						"          Column_41 as string,",
-						"          Column_42 as string,",
-						"          Column_43 as string,",
-						"          Column_44 as string,",
-						"          Column_45 as string,",
-						"          Column_46 as string,",
-						"          Column_47 as string,",
-						"          Column_48 as string,",
-						"          Column_49 as string,",
-						"          Column_50 as string,",
-						"          Column_51 as string,",
-						"          Column_52 as string,",
-						"          Column_53 as string,",
-						"          Column_54 as string,",
-						"          Column_55 as string,",
-						"          Column_56 as string,",
-						"          Column_57 as string,",
-						"          Column_58 as string,",
-						"          Column_59 as string,",
-						"          Column_60 as string,",
-						"          Column_61 as string,",
-						"          Column_62 as string,",
-						"          Column_63 as string,",
-						"          Column_64 as string,",
-						"          Column_65 as string,",
-						"          Column_66 as string,",
-						"          Column_67 as string,",
-						"          Column_68 as string,",
-						"          Column_69 as string,",
-						"          Column_70 as string,",
-						"          Column_71 as string,",
-						"          Column_72 as string,",
-						"          Column_73 as string,",
-						"          Column_74 as string,",
-						"          Column_75 as string,",
-						"          Column_76 as string,",
-						"          Column_77 as string,",
-						"          Column_78 as string,",
-						"          Column_79 as string,",
-						"          Column_80 as string,",
-						"          Column_81 as string,",
-						"          Column_82 as string,",
-						"          Column_83 as string,",
-						"          Column_84 as string,",
-						"          Column_85 as string,",
-						"          Column_86 as string,",
-						"          Column_87 as string,",
-						"          Column_88 as string,",
-						"          Column_89 as string,",
-						"          Column_90 as string,",
-						"          Column_91 as string,",
-						"          Column_92 as string,",
-						"          Column_93 as string,",
-						"          Column_94 as string,",
-						"          Column_95 as string,",
-						"          Column_96 as string,",
-						"          Column_97 as string,",
-						"          Column_98 as string,",
-						"          Column_99 as string,",
-						"          Column_100 as string,",
-						"          Column_101 as string,",
-						"          Column_102 as string,",
-						"          Column_103 as string,",
-						"          Column_104 as string,",
-						"          Column_105 as string,",
-						"          Column_106 as string,",
-						"          Column_107 as string,",
-						"          Column_108 as string,",
-						"          Column_109 as string,",
-						"          Column_110 as string,",
-						"          Column_111 as string,",
-						"          Column_112 as string,",
-						"          Column_113 as string,",
-						"          Column_114 as string,",
-						"          Column_115 as string,",
-						"          Column_116 as string,",
-						"          Column_117 as string,",
-						"          Column_118 as string,",
-						"          Column_119 as string,",
-						"          Column_120 as string,",
-						"          Column_121 as string,",
-						"          Column_122 as string",
-						"     ),",
-						"     partitionFileNames:['delimiter.txt'],",
-						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true,",
-						"     quoteAll: true,",
-						"     mapColumn(",
-						"          Delimiter",
-						"     ),",
-						"     partitionBy('hash', 1)) ~> sink1"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/InputTextUnknownDelimiter')]",
-				"[concat(variables('factoryId'), '/datasets/FoundDelimiter')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/RemoveColumnSpaces')]",
-			"type": "Microsoft.DataFactory/factories/dataflows",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Replace any space\n    regexReplace($$,' ','_')\n\nReplace any non-letter \n    regexReplace($$,'[^a-zA-Z]','_')",
-				"type": "MappingDataFlow",
-				"typeProperties": {
-					"sources": [
-						{
-							"dataset": {
-								"referenceName": "CSVDelimited",
-								"type": "DatasetReference"
-							},
-							"name": "SourceCSV",
-							"description": "CSV Source file with Space in Column Name"
-						}
-					],
-					"sinks": [
-						{
-							"name": "sink1"
-						}
-					],
-					"transformations": [
-						{
-							"name": "RemoveColumnNameSpaces"
-						}
-					],
-					"scriptLines": [
-						"source(output(",
-						"          {Race Date} as string,",
-						"          {Race Track Name} as string,",
-						"          {Race Number} as string,",
-						"          C as string,",
-						"          Country as string,",
-						"          {Horse Name} as string,",
-						"          YOB as string,",
-						"          {Foaling Date} as string,",
-						"          {Foaling Area} as string,",
-						"          {COR Long} as string,",
-						"          {Official Indicator} as string,",
-						"          {RT 7} as string,",
-						"          {Age Restriction} as string,",
-						"          {Sex Restriction} as string,",
-						"          {C ID} as string,",
-						"          {R d} as string",
-						"     ),",
-						"     allowSchemaDrift: false,",
-						"     validateSchema: false,",
-						"     ignoreNoFilesFound: false) ~> SourceCSV",
-						"SourceCSV select(mapColumn(",
-						"          each(match(true()),",
-						"               regexReplace($$,' ','_') = $$)",
-						"     ),",
-						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true) ~> RemoveColumnNameSpaces",
-						"RemoveColumnNameSpaces sink(validateSchema: false,",
-						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true,",
-						"     store: 'cache',",
-						"     format: 'inline',",
-						"     output: false,",
-						"     saveOrder: 1) ~> sink1"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/CSVDelimited')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/dataflow1')]",
-			"type": "Microsoft.DataFactory/factories/dataflows",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "MappingDataFlow",
-				"typeProperties": {
-					"sources": [
-						{
-							"dataset": {
-								"referenceName": "InputDelimiterParameter",
-								"type": "DatasetReference"
-							},
-							"name": "source1"
-						}
-					],
-					"sinks": [
-						{
-							"linkedService": {
-								"referenceName": "AzureBlobStorage1",
-								"type": "LinkedServiceReference"
-							},
-							"name": "sink1"
-						}
-					],
-					"transformations": [],
-					"scriptLines": [
-						"source(allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     ignoreNoFilesFound: false) ~> source1",
-						"source1 sink(allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     format: 'delimited',",
-						"     container: 'data',",
-						"     columnDelimiter: ',',",
-						"     escapeChar: '\\\\',",
-						"     quoteChar: '\\\"',",
-						"     columnNamesAsHeader: false,",
-						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true) ~> sink1"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/InputDelimiterParameter')]",
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
 			]
 		}
 	]

@@ -10,6 +10,12 @@
 		},
 		"AzureSqlDatabase1_connectionString": {
 			"value": ""
+		},
+		"InputAzureBlob_connectionString": {
+			"value": ""
+		},
+		"OutputAzureSQL_connectionString": {
+			"value": ""
 		}
 	}
 }

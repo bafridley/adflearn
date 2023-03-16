@@ -15,6 +15,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
 		},
+		"InputAzureBlob_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'InputAzureBlob'"
+		},
+		"OutputAzureSQL_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'OutputAzureSQL'"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -47,6 +55,12 @@
 					},
 					"AzureSqlDatabase1_connectionString": {
 						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
+					},
+					"InputAzureBlob_connectionString": {
+						"value": "[parameters('InputAzureBlob_connectionString')]"
+					},
+					"OutputAzureSQL_connectionString": {
+						"value": "[parameters('OutputAzureSQL_connectionString')]"
 					}
 				}
 			},

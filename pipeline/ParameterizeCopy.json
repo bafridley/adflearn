@@ -49,7 +49,10 @@
 						"referenceName": "CSVParameter",
 						"type": "DatasetReference",
 						"parameters": {
-							"FileName": "Stallion.csv"
+							"FileName": {
+								"value": "@concat(pipeline().parameters.source,'.csv')",
+								"type": "Expression"
+							}
 						}
 					}
 				],
@@ -58,12 +61,23 @@
 						"referenceName": "SQLParameter",
 						"type": "DatasetReference",
 						"parameters": {
-							"TableName": "stallion"
+							"TableName": {
+								"value": "@pipeline().parameters.destination",
+								"type": "Expression"
+							}
 						}
 					}
 				]
 			}
 		],
+		"parameters": {
+			"source": {
+				"type": "string"
+			},
+			"destination": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	}
 }

@@ -7,8 +7,7 @@
 		},
 		"parameters": {
 			"TableName": {
-				"type": "string",
-				"defaultValue": "stallion"
+				"type": "string"
 			}
 		},
 		"annotations": [],

@@ -66,12 +66,10 @@
 		],
 		"parameters": {
 			"source": {
-				"type": "string",
-				"defaultValue": "Stallion"
+				"type": "string"
 			},
 			"destination": {
-				"type": "string",
-				"defaultValue": "Horse"
+				"type": "string"
 			}
 		},
 		"annotations": []

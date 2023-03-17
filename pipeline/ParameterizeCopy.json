@@ -17,15 +17,9 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "DelimitedTextSource",
-						"storeSettings": {
-							"type": "AzureBlobStorageReadSettings",
-							"recursive": true,
-							"enablePartitionDiscovery": false
-						},
-						"formatSettings": {
-							"type": "DelimitedTextReadSettings"
-						}
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
 					},
 					"sink": {
 						"type": "AzureSqlSink",
@@ -46,11 +40,11 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "CSVParameter",
+						"referenceName": "SQLParameter",
 						"type": "DatasetReference",
 						"parameters": {
-							"FileName": {
-								"value": "@concat(pipeline().parameters.source,'.csv')",
+							"TableName": {
+								"value": "@pipeline().parameters.source",
 								"type": "Expression"
 							}
 						}
@@ -72,10 +66,12 @@
 		],
 		"parameters": {
 			"source": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "Stallion"
 			},
 			"destination": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "Horse"
 			}
 		},
 		"annotations": []

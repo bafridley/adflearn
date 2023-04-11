@@ -1,12 +1,18 @@
 {
 	"name": "OutputAzureSQL",
-	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
 		"type": "AzureSqlDatabase",
 		"typeProperties": {
-			"connectionString": "integrated security=False;encrypt=True;connection timeout=30;data source=bfridley.database.windows.net;initial catalog=sandbox;user id=CloudSAa40a27c6",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDU1NzYxRDA0LTE3OEQtNDBCQi04RURELTk5QkIwOUQwQzdEQV82YTgwOWUzZi1lNWNmLTQzYmYtODcxNi00ZjE0MzRiYzcyNzQiDQp9"
+			"connectionString": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "ADFKV",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "SQLSandboxDB"
+			}
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/linkedservices"
 }

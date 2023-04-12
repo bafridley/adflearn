@@ -4,14 +4,13 @@
 		"annotations": [],
 		"type": "AzureSqlDatabase",
 		"typeProperties": {
-			"connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=bfridley.database.windows.net;Initial Catalog=sandbox;User ID=CloudSAa40a27c6",
-			"password": {
+			"connectionString": {
 				"type": "AzureKeyVaultSecret",
 				"store": {
 					"referenceName": "ADFKV",
 					"type": "LinkedServiceReference"
 				},
-				"secretName": "SQLSandboxDB"
+				"secretName": "SandboxDBConnectionString-SQLAuth"
 			}
 		}
 	},

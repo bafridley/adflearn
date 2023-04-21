@@ -4,7 +4,7 @@
 		"activities": [
 			{
 				"name": "CopyFromCSVtoSQL",
-				"description": "Use parameterized Linked Services to copy from CSV to ",
+				"description": "Use parameterized Linked Services to copy from CSV to SQL Server DB",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -47,7 +47,13 @@
 				"inputs": [
 					{
 						"referenceName": "CSVParameter",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"FileName": {
+								"value": "@pipeline().parameters.source",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"outputs": [
